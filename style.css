@@ -1,0 +1,72 @@
+h1, h2 {
+	text-align: center;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+.names {
+  width: 100%;
+  border-top: 1px solid #cccccc; 
+  border-bottom: 1px solid #cccccc; 
+  font-size: 16px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.names td{
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+
+.discussion{
+  border-top: 1px solid black;
+}
+
+.discussion td{
+  padding: 10px;
+  vertical-align: top;
+}
+
+.discussion td.first{
+  text-align: right;
+}
+
+td.expand {
+  width: 99%;
+}
+td.fitcell {
+  width: 1%;
+  white-space:nowrap
+}
+
+ul.tab {
+    list-style-type: none;
+    text-align: center; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+ul.tab li {display: inline;}
+ul.tab li a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 17px;
+}
+ul.tab li a:hover {background-color: #ddd;}
+ul.tab li a:focus, .active {background-color: #ccc;}
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
