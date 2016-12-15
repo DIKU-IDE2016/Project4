@@ -6,6 +6,41 @@ h1 {
   margin-bottom: 30px;
 }
 
+div.tooltip { 
+    position: absolute;     
+    text-align: center;     
+    width: 60px;          
+    height: 28px;         
+    padding: 2px;       
+    font: 12px sans-serif;    
+    background: #99d8c9; 
+    border: 0px;    
+    border-radius: 8px;     
+    pointer-events: none;     
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+
+circle {
+  fill: #99d8c9;
+  stroke: #2ca25f;
+}
+
+path {
+  fill: #99d8c9;
+  stroke: #2ca25f;
+}
+
+circle.mouseover{
+  stroke: #2ca25f;
+  stroke-width: 4px;
+}
+
 .names {
   width: 100%;
   border-top: 1px solid #cccccc; 
