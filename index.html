@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 	    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<title>IDE Project 4</title>
 	</head>
@@ -30,6 +31,10 @@
 	  				</table>
 			    </div>
 			    <div class="plots">
+
+			    	<select id="pca_selector" class="selectpicker" multiple data-max-options="2">
+					</select>
+					<button type="button" id="updatePlot" class="btn btn-danger">Upate Plot</button>
 				    <div class="col-md-6">
 				        <section>
 				            <hgroup>
@@ -57,14 +62,14 @@
 
 				<div id="introduction" class="tabcontent">
 
-				The dataset for the visualizations comes from two files, <a target="_blank" href="hands.csv">hands.csv</a> and <a target="_blank" href="hands_pca.csv">hands_pca.csv</a>. The first file includes 40 different rows each including 112 dimensions that together represent the outline of a hand. The second file contains the principle components summarize the features for each row. <br/><br/>
-				The chart on the left displays the scatter plot for on the first two principle components of these 40 rows and the chart on the right
-				
-				
-
+				The dataset for the visualizations comes from two files, <a target="_blank" href="hands.csv">hands.csv</a> and <a target="_blank" href="hands_pca.csv">hands_pca.csv</a>. The first file includes 40 different rows each including 112 dimensions that together represent the outline of a hand. The second file contains the principle components summarize the features for each row. In fact instead of having a 112 dimensional scatter plot which is impossible to visualize, we construct two charactristics from them that have maximum variance in order to best summarize our high-dimensional data.<br/><br/>
 				</div>
 
 				<div id="methods" class="tabcontent">
+				The interactive visualization above consists of two dependant plots. "PCA Scatter Plot" is the plot for the first two principle components retrieved from <a target="_blank" href="hands_pca.csv">hands_pca.csv</a>. "Hand Outlines" visualizes a data row in <a target="_blank" href="hands.csv">hands.csv</a> by drawing its 56 coordinates on the plane and connecting them using a smoothened solid line, and coloring the inner part of the resulting ouline. <br/><br/>
+
+				In order to navigate the  above, one simply needs to hover over one of the data point on the PCA scatter plot in order to see the corresponding hand outline belonging to that point on the hand outline plot. <br/><br/>
+				In order to know which row in <a target="_blank" href="hands.csv">hands.csv</a> the data point belongs to, the index is shown in a small tooltip above the point when the point is hovered on.
 				</div>
 
 				<div id="results" class="tabcontent">
@@ -88,6 +93,7 @@
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
 	<script type="text/javascript" src="d3_v3/d3.min.js"></script>
 	<script src="d3_v3/d3plus.min.js"></script>
 	<script type="text/javascript" src="script.js"></script>

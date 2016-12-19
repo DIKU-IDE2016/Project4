@@ -2,6 +2,17 @@ $(document).ready(function(){
     $('a').popover();
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();  
+
+    $("#updatePlot").click(function() {
+        selecttions = $("#pca_selector option:selected");
+        if(selecttions.length < 2) {
+            alert("atlea 2");
+        }
+        else {
+            
+        }
+    });
+
 });
 
 function openTab(evt, cityName) {
@@ -49,11 +60,18 @@ d3.text("hands_pca.csv", function(text){
     var data = d3.csv.parseRows(text);
     var pcaCoordinates = [];
 
+    
+
     // Loop over the data and take 1st column as X and second as Y
     for (var i = 0; i < data.length; i++) {
         var element = data[i];
         pcaCoordinates.push([element[0], element[1]]);
     };
+
+    for (var i = 0; i < 10; i++) {
+        htm = '<option data-index='+i+'>PCA ' + (i+1) + '</option>';
+        $('#pca_selector').append(htm);
+    }
 
     // Define the scales
     var x = d3.scale.linear().range([0, dim.w]);
