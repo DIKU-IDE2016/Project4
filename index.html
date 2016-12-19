@@ -5,75 +5,90 @@
 	    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<title>IDE Project 4</title>
-		<script type="text/javascript" src="d3_v3/d3.min.js"></script>
-		<script src="d3_v3/d3plus.min.js"></script>
 	</head>
 	<body>
-		<!-- <div class="container"> -->
-			<h1>Show of hands</h1>
-			<div>
-	  			<table class="names">
-			  		<tr>
-			  			<td>Eduards Klavins</td>
-			  			<td>Ehsan Khaveh</td>
-			  			<td>Olugbenga Oti</td>
-			  		</tr>
-	  			</table>
-	  		</div>
 
-		    <div class="col-md-6">
-		        <section>
-		            <hgroup>
-		                <h3 class="text-center">Principal Component Analysis</h3>
-		            </hgroup>
-		            <div id="pcaplot"></div>
-		        </section>
-		    </div>
-		    <div class="col-md-6">
-		        <section>
-			         <hgroup>
-			            <h3 class="text-center">Hand plot</h3>
-			        </hgroup>
-			        <div id="handplot"></div>
-		    	</section>
-			</div>
-		</div>		
-		
-		<div class="container">		
-			<h3>Discussion</h3>
-			<table class="discussion">
-				<tr>
-					<td class="first"><b>Dataset</b></td>
-					<td>
-					text
-					</td>
-				</tr>
-				<tr>
-					<td class="first"><b>Motivation</b></td>
-					<td>
-						text
-					</td>
-				</tr>
-				<tr>
-					<td class="first"><b>Individual part</b></td>
-					<td>
-						Eduards Klavins did the tooltips in PCA.
-					</td>
-				</tr>
-				<tr>
-					<td class="first"><b>Attributions</b></td>
-					<td>
-						<ul>
-							<li><a href="http://bl.ocks.org/d3noob/a22c42db65eb00d4e369">Simple D3 tooltips</a></li>
-							<li><a href="">2</a></li>
-							<li><a href="">3</a></li>
-							<li><a href="">4</a></li>
-						</ul>
-					</td>
-				</tr>
-			</table>
+		<div>
+			<h1>Show of Hands</h1>
 		</div>
+		<div class="container_top one">
+		  	<div class=" dashed bk l">
+		    	<div class="arrow top"></div> 
+		    	<div class="arrow bottom"></div>
+		  	</div>
+
+		  	<div class="skew l"></div>
+
+		  	<div class="main">
+		    	<div class="names_div">
+		    		<table class="names">
+			  			<tr>
+			  				<td><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="I coded the shit of this shit">Eduards Klavins</a></td>
+			  				<td><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="I have made visualizations beautoful, I have made visualizations beautoful, I have made visualizations beautoful, I have made visualizations beautoful">Ehsan Khaveh</a></td>
+			  				<td><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="I have done this and that, this and that, this and that, this and that, this and that, this and that, this and that, this and that, this and that, this and that, this and that, this and that, this and that, this and that, this and that, this and that">Olugbenga Oti</a></td>
+			  			</tr>
+	  				</table>
+			    </div>
+			    <div class="plots">
+				    <div class="col-md-6">
+				        <section>
+				            <hgroup>
+				                <h3 class="text-center">PCA Scatter Plot</h3>
+				            </hgroup>
+				            <div id="pcaplot"></div>
+				        </section>
+				    </div>
+				    <div class="col-md-6">
+				        <section>
+					         <hgroup>
+					            <h3 class="text-center">Hand Outlines</h3>
+					        </hgroup>
+					        <div id="handplot"></div>
+				    	</section>
+					</div> 
+				</div>
+
+				<ul class="tab">
+				  	<li><a href="javascript:void(0)" class="tablinks" id="defaultOpen" onclick="openTab(event, 'introduction')">Introduction</a></li>
+				  	<li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'methods')">Methods</a></li>
+				  	<li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'results')">Results</a></li>
+				  	<li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'conclusion')">Conclusion</a></li>
+				</ul>
+
+				<div id="introduction" class="tabcontent">
+
+				The dataset for the visualizations comes from two files, <a target="_blank" href="hands.csv">hands.csv</a> and <a target="_blank" href="hands_pca.csv">hands_pca.csv</a>. The first file includes 40 different rows each including 112 dimensions that together represent the outline of a hand. The second file contains the principle components summarize the features for each row. <br/><br/>
+				The chart on the left displays the scatter plot for on the first two principle components of these 40 rows and the chart on the right
+				
+				
+
+				</div>
+
+				<div id="methods" class="tabcontent">
+				</div>
+
+				<div id="results" class="tabcontent">
+				</div>
+
+				<div id="conclusion" class="tabcontent">
+				</div>  
+		  	</div>
+
+			<div class="skew r"></div>
+			
+			<div class="bk r">
+			  <div class="arrow top"></div> 
+			  <div class="arrow bottom"></div>
+			</div>
+
+		</div>
+
+
+
 	</body>
-	<script type="text/javascript" src="script.js">
-	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="d3_v3/d3.min.js"></script>
+	<script src="d3_v3/d3plus.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>
 </html>
