@@ -136,6 +136,7 @@ d3.text("hands_pca.csv", function(text){
 
     // append all the lines
     svg.append('g')
+        
         .selectAll("circle")
         .data(pcaCoordinates)
         .enter()
@@ -148,6 +149,7 @@ d3.text("hands_pca.csv", function(text){
         })
         .attr("r",8)
         .on('mouseover', function(d, i){
+
             d3.selectAll('circle')
             .classed('mouseover', false);
 
@@ -168,6 +170,7 @@ d3.text("hands_pca.csv", function(text){
                 .duration(500)      
                 .style("opacity", 0);   
         });
+        
 });
 
 // ***************************************************************
@@ -289,5 +292,44 @@ d3.text("hands.csv", function(text) {
     // By default, draw the first hand
     drawHand(0);
 
+    
+    function updateHand (number) {
+    // All circles should be given an id/class name
+    // When one of the indices is clicked
+    // circle id(clicked) is selected
+    // change hand plot
+        //Change hands
+        
+        drawHand(number);
+        
+        div.transition()        
+            .duration(200)      
+            .style("opacity", .9);   
+        div.html("Index: " + number)  
+                .style("left", (d3.event.pageX) + "px")     
+                .style("top", (d3.event.pageY - 28) + "px");           
+    
+    }
+    d3.select('#nine')
+          .on('mouseover', function() {
+            updateHand(9);
+        })
+          .on('mouseout', function() {
+            updateHand(0);
+         });
+    d3.select('#Tnine')
+          .on('mouseover', function() {
+            updateHand(39);
+          })
+          .on('mouseout', function() {
+            updateHand(0);
+         });
+    d3.select('#Thirty')
+          .on('mouseover', function() {
+            updateHand(30);
+          })
+          .on('mouseout', function() {
+            updateHand(0);
+         });
     
 });
