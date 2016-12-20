@@ -73,12 +73,22 @@
 				</div>
 
 				<div id="results" class="tabcontent">
-				As can be seen from the interactive visualization, when you hover a data point the hand plot changes, the closer the indices of the data points to each other the more similar the hand plots are. For example, the hand plot of index 13 and 14 are much closer than index 13 and 23 , even though the latter are closer on the PCA plot.
+				<p> There is no visible direct correlation between the indices of the points and their corresponding hand plots. For example, the data point at index 13 seems to have a closer hand plot to index 14 but this is not enough to say a correlation is established.
+				</p>
+				<p>
+				There are a couple of outliers at the edges of the graph(for example, indices 9,39 and 30). The hand plot for these points seems to have the fingers more far apart than the hand plots of the other indices.
+				</p>
+				<p>
+				Another observation that can be made is that has we move from left to right in the PCA graph; we have fingers more seperated in the hand plot to fingers less and less seperated as we approach the rightmost end of the PCA graph.
+				</p>
 				</div>
 
 				<div id="conclusion" class="tabcontent">
-
-				This shows that the PCA data is a good representation of the full dimensional dataset. It also shows that there is a correlation between consecutive indices in the data.
+				<p>
+				PCA shows the internal structure of the dataset by coverting possibly correlated variables into a set of values of linearly uncorrelated variables; this explains the first observation. 
+				</p>
+				<p>The outliers show the highest level of variance in the data set. </p>
+				<p>As we move from left to right, we move from areas of high variance to low variance.</p>
 				</div>  
 		  	</div>
 
