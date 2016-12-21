@@ -389,6 +389,37 @@ d3.text("hands.csv", function(text) {
     };
     // By default, draw the first hand
     drawHand(0);
-
+    function updateHand (number) {
+    // All circles should be given an id/class name
+    // When one of the indices is clicked
+    // circle id(clicked) is selected
+    // change hand plot
+        //Change hands
+        $(".a"+number).trigger('mouseover');
+        drawHand(number);       
+    
+    }
+    d3.select('#nine')
+          .on('mouseover', function() {
+            updateHand(9);
+        })
+          .on('mouseout', function() {
+            updateHand(0);
+         });
+    d3.select('#Tnine')
+          .on('mouseover', function() {
+            updateHand(39);
+          })
+          .on('mouseout', function() {
+            updateHand(0);
+         });
+    d3.select('#Thirty')
+          .on('mouseover', function() {
+            updateHand(30);
+          })
+          .on('mouseout', function() {
+            updateHand(0);
+         });
+    
     
 });
