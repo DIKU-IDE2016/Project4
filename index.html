@@ -12,6 +12,9 @@
 		<div>
 			<h1>Show of Hands</h1>
 		</div>
+		<div class="float floatNames">Click on each group member's name to see their contribution to this visualization</div>
+		<div class="float floatPoint">Hover on each data point and see what happens</div>
+		<div class="float floatLast">Change PCA components using the dropdown</div>
 		<div class="container_top one">
 		  	<div class=" dashed bk l">
 		    	<div class="arrow top"></div> 
@@ -24,17 +27,13 @@
 		    	<div class="names_div">
 		    		<table class="names">
 			  			<tr>
-			  				<td><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Display the datafile row index as a text-label or a tooltip when the mouse hovers over its point in the PCA panel.">Eduards Klavins</a></td>
-			  				<td><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="I have made visualizations beautoful, I have made visualizations beautoful, I have made visualizations beautoful, I have made visualizations beautoful">Ehsan Khaveh</a></td>
-			  				<td><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="I have connected a piece of text in the results section with the visualization">Olugbenga Oti</a></td>
+			  				<td><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="The extension I added to our visualization was displaying datafile row index as a text-label or a tooltip when the mouse hovers over its point in PCA Scatter Plot">Eduards Klavins</a></td>
+			  				<td><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="For my individual part, I added the support for changing PCA-variables in PCA Scatter Plot, with a nice transition. I decided to include the first 10 PCA components for this extension, but this can be simply extended to have all the components by adding the rest of the components to the multiselection dropdown">Ehsan Khaveh</a></td>
+			  				<td><a tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="The extension I added to this visualization was connecting pieces of text in the discussion with the visualization. When the mouse hovers over the discussion about an outlier, the outlier gets highlighed in the visualization">Olugbenga Oti</a></td>
 			  			</tr>
 	  				</table>
 			    </div>
 			    <div class="plots">
-
-			    	<select id="pca_selector" class="selectpicker" multiple data-max-options="2">
-					</select>
-					<button type="button" id="updatePlot" class="btn btn-danger">Update Plot</button>
 				    <div class="col-md-6">
 				        <section>
 				            <hgroup>
@@ -53,6 +52,26 @@
 					</div> 
 				</div>
 
+				<div id ="pca_panel">
+					<select id="pca_selector" class="selectpicker" multiple data-max-options="2">
+						<option value="0" selected>PCA 1</option>
+						<option value="1" selected>PCA 2</option>
+						<option value="2">PCA 3</option>
+						<option value="3">PCA 4</option>
+						<option value="4">PCA 5</option>
+						<option value="5">PCA 6</option>
+						<option value="6">PCA 7</option>
+						<option value="7">PCA 8</option>
+						<option value="8">PCA 9</option>
+						<option value="9">PCA 10</option>
+					</select>
+					<button type="button" id="updatePlot" class="btn btn-danger">Update Plot</button>
+					<div id="myAlert" class="alert alert-danger">
+    					<a class="close" onclick="$('#myAlert').hide()">&times;</a>
+    					<strong>Error!</strong> You should choose at least two PCA components
+					</div>
+				</div>
+
 				<ul class="tab">
 				  	<li><a href="javascript:void(0)" class="tablinks" id="defaultOpen" onclick="openTab(event, 'introduction')">Introduction</a></li>
 				  	<li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'methods')">Methods</a></li>
@@ -61,27 +80,34 @@
 				</ul>
 
 				<div id="introduction" class="tabcontent">
-
-				The dataset for the visualizations comes from two files, <a target="_blank" href="hands.csv">hands.csv</a> and <a target="_blank" href="hands_pca.csv">hands_pca.csv</a>. The first file includes 40 different rows each including 112 dimensions that together represent the outline of a hand. The second file contains the principal component analysis with the columns that have most variation to the left (we plot only first 2). In fact instead of having a 112 dimensional scatter plot which is impossible to visualize, we construct two charactristics from them that have maximum variance in order to best summarize our high-dimensional data.<br/><br/>
+				<p>
+					The dataset for the visualizations comes from two files, <a target="_blank" href="hands.csv">hands.csv</a> and <a target="_blank" href="hands_pca.csv">hands_pca.csv</a>. The first file includes 40 different rows each including 112 dimensions that together represent the outline of a hand. The second file contains the principle components summarize the features for each row. In fact instead of having a 112 dimensional scatter plot which is impossible to visualize, we construct two charactristics from them that have maximum variance in order to best summarize our high-dimensional data.
+				</p>
 				</div>
 
 				<div id="methods" class="tabcontent">
-				The interactive visualization above consists of two dependent plots. "PCA Scatter Plot" is the plot for the first two principle components retrieved from <a target="_blank" href="hands_pca.csv">hands_pca.csv</a>. "Hand Outlines" visualizes a data row in <a target="_blank" href="hands.csv">hands.csv</a> by drawing its 56 coordinates on the plane and connecting them using a smoothened solid line, and coloring the inner part of the resulting ouline. <br/><br/>
-
-				In order to navigate the  above, one simply needs to hover over one of the data point on the PCA scatter plot in order to see the corresponding hand outline belonging to that point on the hand outline plot. <br/><br/>
-				In order to know which row in <a target="_blank" href="hands.csv">hands.csv</a> the data point belongs to, the index is shown in a small tooltip above the point when the point is hovered on. To see who has contributed for each of the individual assignments, simply click on the name above in the banner.
+				<p>
+					The interactive visualization above consists of two dependant plots. <a target="_blank" href="#" class="scatterHref">PCA Scatter Plot</a> is the plot for the first two principle components retrieved from <a target="_blank" href="hands_pca.csv">hands_pca.csv</a>. <a target="_blank" href="#" class="handHref">Hand Outlines</a> visualizes a data row in <a target="_blank" href="hands.csv">hands.csv</a> by drawing its 56 coordinates on the plane and connecting them using a smoothened solid line, and coloring the inner part of the resulting ouline. 
+				</p>
+				<p>
+					In order to navigate the  above, one simply needs to hover over one of the data point on the <a target="_blank" href="#" class="scatterHref">PCA Scatter Plot</a> in order to see the corresponding hand outline belonging to that point on the <a target="_blank" href="#" class="handHref">Hand Outline Plot</a>. 
+				</p>
+				<p>
+					In order to know which row in <a target="_blank" href="hands.csv">hands.csv</a> the data point belongs to, the index is shown in a small tooltip above the point when the point is hovered on.
+				</p>
 				</div>
 
 				<div id="results" class="tabcontent">
-				<p> There is no visible direct correlation between the indices of the points and their corresponding hand plots. For example, the data point at index 13 seems to have a closer hand plot to index 14 but this is not enough to say a correlation is established.
-				</p>
-				<p>
-				There are a couple of outliers at the edges of the graph(for example, indices 
-				<a id = "nine">9</a>,<a id = "Tnine">39</a> and <a id = "Thirty" >30</a>). The hand plot for these points seems to have the fingers more far apart than the hand plots of the other indices.
-				</p>
-				<p>
-				Another observation that can be made is that has we move from left to right in the PCA graph; we have fingers more seperated in the hand plot to fingers less and less seperated as we approach the rightmost end of the PCA graph.
-				</p>
+					<p> 
+						There is no visible direct correlation between the indices of the points and their corresponding hand plots. For example, the data point at index 13 seems to have a closer hand plot to index 14 but this is not enough to say a correlation is established.
+					</p>
+					<p>
+						There are a couple of outliers at the edges of the graph(for example, indices 
+						<a id = "nine">9</a>,<a id = "Tnine">39</a> and <a id = "Thirty" >30</a>). The hand plot for these points seems to have the fingers more far apart than the hand plots of the other indices.
+					</p>
+					<p>
+						Another observation that can be made is that has we move from left to right in the PCA graph; we have fingers more seperated in the hand plot to fingers less and less seperated as we approach the rightmost end of the PCA graph.
+					</p>
 				</div>
 
 				<div id="conclusion" class="tabcontent">
@@ -90,7 +116,7 @@
 				</p>
 				<p>The outliers show the highest level of variance in the data set. </p>
 				<p>As we move from left to right, we move from areas of high variance to low variance.</p>
-				</div>  
+				</div>   
 		  	</div>
 
 			<div class="skew r"></div>

@@ -267,3 +267,43 @@ ul.tab li a:focus, .active {background-color: #ccc;}
     transform: skew(00deg,-40deg);
   }
 }
+
+#pca_panel {
+  margin-left: 150px;
+  margin-bottom: 50px;
+}
+
+#myAlert {
+  margin:0px;
+  padding: 7px;
+  display:none;
+}
+.close {
+  margin-left: 10px;
+  margin-right: 2px;
+}
+
+.arrow {
+  display: none !important;
+}
+a:active,
+a:focus {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.float {
+  display: none;
+  position: absolute;
+  background: rgba(255,0,0,0.1) ;
+  left: 0;
+  padding: 10px;
+  width: 150px;
+  z-index: 200;
+}
+
+.floatNames { top: 30px; width: 250px;}
+.floatPoint { top: 450px; }
+.floatLast { top: 840px; }

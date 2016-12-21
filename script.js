@@ -3,15 +3,47 @@ $(document).ready(function(){
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();  
 
-    $("#updatePlot").click(function() {
-        selecttions = $("#pca_selector option:selected");
-        if(selecttions.length < 2) {
-            alert("atlea 2");
-        }
-        else {
-            
-        }
-    });
+    $("#scatterHref").click(function(e) {
+        e.preventDefault();
+    }); 
+
+    $( ".scatterHref" )
+      .on( "mouseenter", function() {
+        $( "#pcaplotSvg" ).css("background-color", "#ddd");
+      })
+      .on( "mouseleave", function() {
+        $( "#pcaplotSvg" ).css("background-color", "inherit");
+    }); 
+
+    $( ".handHref" )
+      .on( "mouseenter", function() {
+        $( "#handplotSvg" ).css("background-color", "#ddd");
+      })
+      .on( "mouseleave", function() {
+        $( "#handplotSvg" ).css("background-color", "inherit");
+    }); 
+
+});
+
+$(document).scroll(function () {
+    var y = $(this).scrollTop();
+    if (y < 100) {
+        $('.floatNames').fadeIn();
+        $('.floatPoint').fadeOut();
+        $('.floatLast').fadeOut();
+    } else if(y >= 110 && y < 300) {
+        $('.floatNames').fadeOut();
+        $('.floatPoint').fadeIn();
+        $('.floatLast').fadeOut();
+    } else if(y >= 150) {
+        $('.floatNames').fadeOut();
+        $('.floatPoint').fadeOut();
+        $('.floatLast').fadeIn();
+    } else {
+        $('.floatNames').fadeOut();
+        $('.floatPoint').fadeOut();
+        $('.floatLast').fadeOut();
+    }
 
 });
 
@@ -60,18 +92,11 @@ d3.text("hands_pca.csv", function(text){
     var data = d3.csv.parseRows(text);
     var pcaCoordinates = [];
 
-    
-
     // Loop over the data and take 1st column as X and second as Y
     for (var i = 0; i < data.length; i++) {
         var element = data[i];
         pcaCoordinates.push([element[0], element[1]]);
     };
-
-    for (var i = 0; i < 10; i++) {
-        htm = '<option data-index='+i+'>PCA ' + (i+1) + '</option>';
-        $('#pca_selector').append(htm);
-    }
 
     // Define the scales
     var x = d3.scale.linear().range([0, dim.w]);
@@ -98,6 +123,7 @@ d3.text("hands_pca.csv", function(text){
     // Add the SVG element
     var svg = d3.select("#pcaplot")
     .append("svg")
+    .attr("id", "pcaplotSvg")
     .attr("width",dim.w +margins.left + margins.right)
     .attr("height",dim.h + margins.top + margins.bottom)
     .append("g")
@@ -116,6 +142,7 @@ d3.text("hands_pca.csv", function(text){
     // Append axis labels
     svg.append("text")
         .attr("class", "x label")
+        .attr("id", "xLabel")
         .attr("text-anchor", "end")
         .attr("x", dim.w-5)
         .attr("y", dim.h-5)
@@ -123,6 +150,7 @@ d3.text("hands_pca.csv", function(text){
 
     svg.append("text")
         .attr("class", "y label")
+        .attr("id", "yLabel")
         .attr("text-anchor", "end")
         .attr("y", 15)
         .attr("x", -5)
@@ -136,7 +164,6 @@ d3.text("hands_pca.csv", function(text){
 
     // append all the lines
     svg.append('g')
-        
         .selectAll("circle")
         .data(pcaCoordinates)
         .enter()
@@ -149,7 +176,6 @@ d3.text("hands_pca.csv", function(text){
         })
         .attr("r",8)
         .on('mouseover', function(d, i){
-
             d3.selectAll('circle')
             .classed('mouseover', false);
 
@@ -170,7 +196,79 @@ d3.text("hands_pca.csv", function(text){
                 .duration(500)      
                 .style("opacity", 0);   
         });
-        
+
+        d3.select("#updatePlot")
+            .on("click", function() {
+                $("#myAlert").hide();
+
+                selections = $("#pca_selector option:selected");
+                if(selections.length < 2) {
+                    $("#myAlert").fadeIn().css("display","inline-block");
+                }
+                else {
+                    selected_inds = [];
+                    pcaCoordinates = [];
+                    selections.each(function() {
+                        selected_inds.push($(this).val());
+                    });
+                                        
+                    // Loop over the data and take 1st column as X and second as Y
+                    for (var i = 0; i < data.length; i++) {
+                        var element = data[i];
+                        pcaCoordinates.push([element[selected_inds[0]], element[selected_inds[1]]]);
+                    };
+
+                    console.log(pcaCoordinates);
+                    x.domain([
+                        d3.min(pcaCoordinates, function(d) { return +d[0]; }),
+                        d3.max(pcaCoordinates, function(d) { return +d[0]; })
+                        ]);
+                    y.domain([
+                        d3.min(pcaCoordinates, function(d) { return +d[1]; }),
+                        d3.max(pcaCoordinates, function(d) { return +d[1]; })
+                        ]);
+
+                    svg.selectAll("circle")
+                        .data(pcaCoordinates)
+                        .transition()  
+                        .duration(1000)
+                        .delay(function(d, i) {
+                             return i / pcaCoordinates.length * 500;  
+                        })    
+                        .attr("cx", function(d) {
+                            return x(d[0]);  // Circle's X
+                        })
+                        .attr("cy", function(d) {
+                            return y(d[1]);  // Circle's Y
+                        })
+                        .each("end", function() {  // End animation
+                            d3.select(this)  // 'this' means the current element
+                                .transition()
+                                .duration(500);  // Change radius
+                        });
+                    
+                    // Update X Axis
+                    svg.select(".x.axis")
+                        .transition()
+                        .duration(1000)
+                        .call(xAxis);
+                    // Update Y Axis
+                    svg.select(".y.axis")
+                        .transition()
+                        .duration(100)
+                        .call(yAxis);
+
+                    pcaX_no = parseInt(selected_inds[0])+1;
+                    svg.select("#xLabel")
+                        .text("PCA "+pcaX_no);
+
+                    pcaY_no = parseInt(selected_inds[1])+1;
+                    svg.select("#yLabel")
+                        .text("PCA "+pcaY_no);
+
+                }
+                
+            });
 });
 
 // ***************************************************************
@@ -227,8 +325,8 @@ d3.text("hands.csv", function(text) {
 
     //Create svg element
     var svg = d3.select("#handplot")
-    
         .append("svg")
+        .attr("id", "handplotSvg")
         .attr("width", dim.w + margins.left + margins.right)
         .attr("height", dim.h + margins.top + margins.bottom)
         .append("g").attr("transform", "translate(" + margins.left + ", " + margins.top + ")");
@@ -292,44 +390,5 @@ d3.text("hands.csv", function(text) {
     // By default, draw the first hand
     drawHand(0);
 
-    
-    function updateHand (number) {
-    // All circles should be given an id/class name
-    // When one of the indices is clicked
-    // circle id(clicked) is selected
-    // change hand plot
-        //Change hands
-        
-        drawHand(number);
-        
-        div.transition()        
-            .duration(200)      
-            .style("opacity", .9);   
-        div.html("Index: " + number)  
-                .style("left", (d3.event.pageX) + "px")     
-                .style("top", (d3.event.pageY - 28) + "px");           
-    
-    }
-    d3.select('#nine')
-          .on('mouseover', function() {
-            updateHand(9);
-        })
-          .on('mouseout', function() {
-            updateHand(0);
-         });
-    d3.select('#Tnine')
-          .on('mouseover', function() {
-            updateHand(39);
-          })
-          .on('mouseout', function() {
-            updateHand(0);
-         });
-    d3.select('#Thirty')
-          .on('mouseover', function() {
-            updateHand(30);
-          })
-          .on('mouseout', function() {
-            updateHand(0);
-         });
     
 });
